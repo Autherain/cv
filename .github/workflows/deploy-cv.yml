@@ -1,0 +1,63 @@
+name: Deploy CV
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "basic-resume/**"
+      - ".github/workflows/deploy-cv.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: typst-community/setup-typst@v5
+        with:
+          typst-version: 0.15.1
+
+      - name: Compile CV to PDF
+        run: typst compile basic-resume/main.typ cv.pdf
+
+      - name: Prepare Pages artifact
+        run: |
+          mkdir -p public
+          cp cv.pdf public/cv.pdf
+          cat > public/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <meta http-equiv="refresh" content="0; url=cv.pdf" />
+              <title>Etienne Vaneecloo — CV</title>
+            </head>
+            <body>
+              <p>Redirecting to the <a href="cv.pdf">CV (PDF)</a>...</p>
+            </body>
+          </html>
+          EOF
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
