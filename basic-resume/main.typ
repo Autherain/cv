@@ -24,7 +24,7 @@
 
 == Profile
 Platform Engineer specializing in vms/bare-metal, multi-cluster Kubernetes for mission-critical
-SaaS under 99.8%+ SLA. Builds declarative cluster provisioning with Cluster API and Go
+SaaS under 99.5%+ SLA. Builds declarative cluster provisioning with Cluster API and Go
 tooling that turns slow, manual operations into fast, reliable self-service workflows for
 infra and dev teams.
 
@@ -45,8 +45,8 @@ infra and dev teams.
 )
 #linebreak()
 _SaaS platform for revenue management, ticketing, and freight optimization (SNCF, Qatar
-Airways, PSG); multi-cluster bare-metal infrastructure under 99.9%+ SLA._
-- Operate Kubernetes (CAPI/CAPO) at scale across multi-cluster, bare-metal infrastructure, sustaining 99.8%+ SLA for mission-critical SaaS products.
+Airways, PSG); multi-cluster bare-metal infrastructure under 99.5%+ SLA._
+- Operate Kubernetes (CAPI/CAPO) at scale across multi-cluster, bare-metal infrastructure, sustaining 99.5%+ SLA for mission-critical SaaS products.
 // - Manage the cluster lifecycle end-to-end with Cluster API (CAPI/CAPO) on vms/bare metal.
 - Redesigned the disaster-recovery procedure for application redeployment, cutting recovery time from 5h to 15min (95% reduction).
 - Building reliable Go tools to automate time-consuming Kubernetes maintenance tasks to replace fragile, ad-hoc Python scripts.
@@ -59,7 +59,7 @@ Airways, PSG); multi-cluster bare-metal infrastructure under 99.9%+ SLA._
 )
 #linebreak()
 _Migration of a legacy PHP monolith to a microservices architecture under 1,400 req/s load._
-- Managed VMs Kubeadm Kubernetes infrastructure autonomously, sustaining 98.8% production uptime through gitops.
+- Managed VMs Kubeadm Kubernetes infrastructure autonomously, sustaining 98.6% production uptime through kustomize/helm.
 // - Designed and built a self-service, multi-provider export platform, cutting related development overhead by 70%.
 - Developed event-driven Go microservices (NATS, Jetsteam, PostgreSQL), actively contributing to the progressive PHP monolith migration.
 // - Integrated and operated NATS & JetStream as the backbone of the event-driven architecture.
