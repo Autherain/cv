@@ -34,16 +34,22 @@ jobs:
         run: |
           mkdir -p public
           cp cv.pdf public/cv.pdf
-          cat > public/index.html <<'EOF'
+          # Cache-busting: GitHub Pages forces cache-control max-age=600 and
+          # does not allow custom headers, so we publish a copy under a
+          # commit-specific name and redirect to it. A new URL per deploy
+          # means browsers can never reuse a stale cached PDF.
+          SHORT_SHA="${GITHUB_SHA::7}"
+          cp cv.pdf "public/cv-${SHORT_SHA}.pdf"
+          cat > public/index.html <<EOF
           <!doctype html>
           <html lang="en">
             <head>
               <meta charset="utf-8" />
-              <meta http-equiv="refresh" content="0; url=cv.pdf" />
+              <meta http-equiv="refresh" content="0; url=cv-${SHORT_SHA}.pdf" />
               <title>Etienne Vaneecloo — CV</title>
             </head>
             <body>
-              <p>Redirecting to the <a href="cv.pdf">CV (PDF)</a>...</p>
+              <p>Redirecting to the <a href="cv-${SHORT_SHA}.pdf">CV (PDF)</a>...</p>
             </body>
           </html>
           EOF
